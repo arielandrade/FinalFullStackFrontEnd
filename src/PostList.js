@@ -4,7 +4,7 @@ import PostItem from './PostItem';
 
 const PostList = ({ list }) => (
   <div>
-    <h3>{list.length} posts</h3>
+    <h3 className="contador">{list.length} posts</h3>
     
     <hr/>
     

@@ -7,9 +7,9 @@ import PostInput from './PostInput';
 const App = () => (
   <Router history={history}>
     <div>
-      <ul>
-        <li><Link to="/">Post list</Link></li>
-        <li><Link to="/posts/add">Add post</Link></li>
+      <ul className="menu">
+        <li ><Link to="/">Post list</Link></li>
+        <li ><Link to="/posts/add">Add post</Link></li>
       </ul>
 
       <hr/>
