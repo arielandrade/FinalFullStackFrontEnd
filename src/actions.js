@@ -1,46 +1,81 @@
 import * as actionID from './action-list';
 
-
-
 export function initState() {
+return dispatch=>{
 
-    return fetch("http://172.50.1.33:3000/post",{method:"GET"}).then(response => {
-        console.log(response)
-    })
+    fetch("http://172.50.0.231:8080/", {
+          mode: 'cors',
+          method: "GET"
+        
+        }).then(response=>{
+            return response.json()
+            }).then(response=>{
+                console.log(response)
+            dispatch({
+                type:"REQUEST_POST_SUCCEED",
+                data:response
+            });
+            })
+            
+            .catch(err=>{
+                console.log("no funciono",err)
+            })
+        }
 
 }
+    
 
 function baseDispatch(action, argument) {
-    return dispatch => {
-        dispatch({
-            type: action,
-            argument: argument,
-        });
-    };
+    console.log(action);
+  return dispatch => {
+    dispatch({
+      type: action,
+      argument: argument,
+    });
+  };
 }
 
 export const inputSubmit = x => {
-    var data = new FormData();
+    return dispatch => {
+    
+        var data = new FormData();
 
-    data.append("data", x.image);
+        data.append("data", x.image);
+        console.log("before fetch");
 
-    fetch("http://172.50.1.33:3000/post", {
-        mode: 'no-cors',
-        method: "POST",
-        body: data
-    }).then(function(res) {
-        if (res.ok) {
-            alert("Perfect! ");
-        } else if (res.status == 401) {
+        //debug start
+        (new Promise((resolve, reject) => {
+            resolve({
+                ok: true, 
+                Id: '123', 
+                json: function() { 
+                    return {Id: '123'}
+                }
+            })
+        }))
+        /*debug end
+        //posta start
+        fetch("http://172.50.1.33:3000/post", {
+          mode: 'cors',
+          method: "POST",
+          body: data
+        })
+        //posta end
+        */.then(function (res) {
+          console.log(res);
+          if (res.ok) {
+            console.log("fetch ok");
+            x.history.push("/");
+          } else if (res.status === 401) {
+            console.log("error 401");
             alert("Oops! ");
-        }
-    }, function(e) {
-        alert("Error submitting form!");
-    });
-
-    baseDispatch(actionID.INPUT_SUBMIT, x);
-
-    x.history.push("/");
+          }
+        }, function (e) {
+          console.log("error: ", e);
+          alert("Error submitting form: ", e);
+          console.log(e);
+        });   
+    }
 }
 
 export const inputImageChange = x => baseDispatch(actionID.INPUT_IMAGE_CHANGE, x);

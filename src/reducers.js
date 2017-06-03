@@ -43,6 +43,9 @@ const postList = (state = {list: []}, action) => {
     case actionID.ITEM_DELETE:
       return { list: state.list.filter( x => x.id !== action.argument )} ;
       
+   case "REQUEST_POST_SUCCEED":
+    return { list:action.data}
+
     default:
       return state;
   }

@@ -14,11 +14,13 @@ class PostList extends React.Component {
     }
 
     render() {
-        return ( <div>
-
-                    <h2> Postea algo gato! < /h2>
-
-                     </div>
+        console.log(this.props)
+        return (    
+            <ul>
+                {this.props.list.map(post => {
+                    return <li key={post.title}>{post.title} <img src={post.path} /></li>
+                })}
+            </ul>
         )
     }
 }
