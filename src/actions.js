@@ -1,6 +1,7 @@
 import * as actionID from './action-list';
 
 function baseDispatch(action, argument) {
+    console.log(action);
   return dispatch => {
     dispatch({
       type: action,
@@ -10,27 +11,46 @@ function baseDispatch(action, argument) {
 }
 
 export const inputSubmit = x => {
-    var data = new FormData();
-
-    data.append("data", x.image);
-
-    fetch("http://172.50.1.33:3000/post", {
-      mode: 'no-cors',
-      method: "POST",
-      body: data
-    }).then(function (res) {
-      if (res.ok) {
-        alert("Perfect! ");
-      } else if (res.status == 401) {
-        alert("Oops! ");
-      }
-    }, function (e) {
-      alert("Error submitting form!");
-    });
-
-    baseDispatch(actionID.INPUT_SUBMIT, x);
+    return dispatch => {
     
-    x.history.push("/");
+        var data = new FormData();
+
+        data.append("data", x.image);
+        console.log("before fetch");
+
+        //debug start
+        (new Promise((resolve, reject) => {
+            resolve({
+                ok: true, 
+                Id: '123', 
+                json: function() { 
+                    return {Id: '123'}
+                }
+            })
+        }))
+        /*debug end
+        //posta start
+        fetch("http://172.50.1.33:3000/post", {
+          mode: 'cors',
+          method: "POST",
+          body: data
+        })
+        //posta end
+        */.then(function (res) {
+          console.log(res);
+          if (res.ok) {
+            console.log("fetch ok");
+            x.history.push("/");
+          } else if (res.status === 401) {
+            console.log("error 401");
+            alert("Oops! ");
+          }
+        }, function (e) {
+          console.log("error: ", e);
+          alert("Error submitting form: ", e);
+          console.log(e);
+        });   
+    }
 }
 
 export const inputImageChange = x => baseDispatch(actionID.INPUT_IMAGE_CHANGE, x);
