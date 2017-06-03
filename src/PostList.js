@@ -1,15 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PostItem from './PostItem';
+import {initState }from "./actions"
 
-const PostList = ({ list }) => (
-  <div>
-    <h3 className="contador">{list.length} posts</h3>
-    
-    <hr/>
-    
-    {list.map(post => <PostItem key={post.id} {...post}/>)}
-  </div>
-);
 
-export default connect(state => state.postList)(PostList);
+
+class PostList extends React.Component {
+
+    componentDidMount() {
+
+        this.props.initState()
+
+    }
+
+    render() {
+        console.log(this.props)
+        return (    
+            <ul>
+                {this.props.list.map(post => {
+                    return <li key={post.title}>{post.title} <img src={post.path} /></li>
+                })}
+            </ul>
+        )
+    }
+}
+
+export default connect(state => state.postList, { initState })(PostList)

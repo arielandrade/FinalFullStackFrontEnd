@@ -1,5 +1,30 @@
 import * as actionID from './action-list';
 
+export function initState() {
+return dispatch=>{
+
+    fetch("http://172.50.0.231:8080/", {
+          mode: 'cors',
+          method: "GET"
+        
+        }).then(response=>{
+            return response.json()
+            }).then(response=>{
+                console.log(response)
+            dispatch({
+                type:"REQUEST_POST_SUCCEED",
+                data:response
+            });
+            })
+            
+            .catch(err=>{
+                console.log("no funciono",err)
+            })
+        }
+
+}
+    
+
 function baseDispatch(action, argument) {
     console.log(action);
   return dispatch => {
