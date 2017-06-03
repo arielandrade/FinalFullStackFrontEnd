@@ -1,0 +1,43 @@
+@import "https://fonts.googleapis.com/css?family=Pacifico";
+body {
+  background: #e0e0e0; }
+
+.menu {
+  list-style: none;
+  text-align: center; }
+  .menu li {
+    width: 200px;
+    background: #eceff1;
+    font-size: 50px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 20px;
+    border-radius: 5px; }
+    .menu li a {
+      text-decoration: none;
+      color: #000;
+      font-family: 'Pacifico', cursive; }
+  .menu :hover {
+    background: #c9c9c9; }
+
+.contador {
+  font-size: 50px;
+  text-align: center;
+  font-family: 'Pacifico', cursive; }
+
+.cuadroPost {
+  width: 50%;
+  height: 500px;
+  background-color: #c9c9c9;
+  margin: 20px 25%; }
+  .cuadroPost h3 {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Pacifico', cursive; }
+  .cuadroPost input {
+    display: flex; }
+  .cuadroPost .textPost {
+    width: 300px;
+    height: 150px; }
+
+/*# sourceMappingURL=style.css.map */
