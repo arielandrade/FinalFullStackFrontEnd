@@ -1,6 +1,7 @@
 import * as actionID from './action-list';
 
 function baseDispatch(action, argument) {
+    console.log(action);
   return dispatch => {
     dispatch({
       type: action,
@@ -9,8 +10,50 @@ function baseDispatch(action, argument) {
   };
 }
 
+export const inputSubmit = x => {
+    return dispatch => {
+    
+        var data = new FormData();
+
+        data.append("data", x.image);
+        console.log("before fetch");
+
+        //debug start
+        (new Promise((resolve, reject) => {
+            resolve({
+                ok: true, 
+                Id: '123', 
+                json: function() { 
+                    return {Id: '123'}
+                }
+            })
+        }))
+        /*debug end
+        //posta start
+        fetch("http://172.50.1.33:3000/post", {
+          mode: 'cors',
+          method: "POST",
+          body: data
+        })
+        //posta end
+        */.then(function (res) {
+          console.log(res);
+          if (res.ok) {
+            console.log("fetch ok");
+            x.history.push("/");
+          } else if (res.status === 401) {
+            console.log("error 401");
+            alert("Oops! ");
+          }
+        }, function (e) {
+          console.log("error: ", e);
+          alert("Error submitting form: ", e);
+          console.log(e);
+        });   
+    }
+}
+
 export const inputImageChange = x => baseDispatch(actionID.INPUT_IMAGE_CHANGE, x);
-export const inputSubmit = x => baseDispatch(actionID.INPUT_SUBMIT, x);
 export const inputTextChange = x => baseDispatch(actionID.INPUT_TEXT_CHANGE, x);
 
 export const editRequestData = x => baseDispatch(actionID.EDIT_REQUEST_DATA, x);
