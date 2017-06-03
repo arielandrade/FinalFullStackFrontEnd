@@ -1,12 +1,22 @@
 import * as actionID from './action-list';
 
+
+
+export function initState() {
+
+    return fetch("http://172.50.1.33:3000/post",{method:"GET"}).then(response => {
+        console.log(response)
+    })
+
+}
+
 function baseDispatch(action, argument) {
-  return dispatch => {
-    dispatch({
-      type: action,
-      argument: argument,
-    });
-  };
+    return dispatch => {
+        dispatch({
+            type: action,
+            argument: argument,
+        });
+    };
 }
 
 export const inputSubmit = x => {
@@ -15,21 +25,21 @@ export const inputSubmit = x => {
     data.append("data", x.image);
 
     fetch("http://172.50.1.33:3000/post", {
-      mode: 'no-cors',
-      method: "POST",
-      body: data
-    }).then(function (res) {
-      if (res.ok) {
-        alert("Perfect! ");
-      } else if (res.status == 401) {
-        alert("Oops! ");
-      }
-    }, function (e) {
-      alert("Error submitting form!");
+        mode: 'no-cors',
+        method: "POST",
+        body: data
+    }).then(function(res) {
+        if (res.ok) {
+            alert("Perfect! ");
+        } else if (res.status == 401) {
+            alert("Oops! ");
+        }
+    }, function(e) {
+        alert("Error submitting form!");
     });
 
     baseDispatch(actionID.INPUT_SUBMIT, x);
-    
+
     x.history.push("/");
 }
 

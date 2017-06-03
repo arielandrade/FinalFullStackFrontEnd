@@ -1,15 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PostItem from './PostItem';
+import {initState }from "./actions"
 
-const PostList = ({ list }) => (
-  <div>
-    <h3>{list.length} posts</h3>
-    
-    <hr/>
-    
-    {list.map(post => <PostItem key={post.id} {...post}/>)}
-  </div>
-);
 
-export default connect(state => state.postList)(PostList);
+
+class PostList extends React.Component {
+
+    componentDidMount() {
+
+        this.props.initState()
+
+    }
+
+    render() {
+        return ( <div>
+
+                    <h2> Postea algo gato! < /h2>
+
+                     </div>
+        )
+    }
+}
+
+export default connect(state => state.postList, { initState })(PostList)
+
+
+
+
+
+
