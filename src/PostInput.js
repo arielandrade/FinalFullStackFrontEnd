@@ -16,7 +16,6 @@ const PostInput = ({
   inputSubmit,
 }) => {
   
-  
   const submit = x => {
     inputSubmit({ image: document.querySelector('input[type="file"]').files[0], history: history });    
     //document.body.appendChild(x.target);    
@@ -24,7 +23,6 @@ const PostInput = ({
     //x.preventDefault();
     console.log("redirecting");
     history.push("/");
-
   }
 
   return (
@@ -41,7 +39,6 @@ const PostInput = ({
         onChange={e => inputTextChange(e.target.value)}
       />
         <input type="file" name="myFileInput" />
-
         <input type="button" value="Submit" 
         onClick={inputSubmit({ image: document.querySelector('input[type="file"]').files[0], history: history })}/>
       </form>

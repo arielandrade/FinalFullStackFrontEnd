@@ -34,7 +34,6 @@ export const inputSubmit = x => {
 }
 
 export const inputImageChange = x => baseDispatch(actionID.INPUT_IMAGE_CHANGE, x);
-
 export const inputTextChange = x => baseDispatch(actionID.INPUT_TEXT_CHANGE, x);
 
 export const editRequestData = x => baseDispatch(actionID.EDIT_REQUEST_DATA, x);
